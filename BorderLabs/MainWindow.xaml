@@ -1,0 +1,26 @@
+﻿<Window
+    x:Class="BorderLabs.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:units="clr-namespace:AnimateBorder.UI.Units;assembly=AnimateBorder"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Grid>
+        <units:AnimateBorder
+            BorderThickness="10"
+            CornerRadius="50"
+            Interval="0:0:2">
+            <units:AnimateBorder.BorderBrushs>
+                <x:Array Type="{x:Type SolidColorBrush}">
+                    <SolidColorBrush Color="Yellow" />
+                    <SolidColorBrush Color="Red" />
+                    <SolidColorBrush Color="Blue" />
+                </x:Array>
+            </units:AnimateBorder.BorderBrushs>
+        </units:AnimateBorder>
+    </Grid>
+</Window>
