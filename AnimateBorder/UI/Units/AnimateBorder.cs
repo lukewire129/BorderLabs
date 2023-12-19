@@ -26,7 +26,7 @@ namespace AnimateBorder.UI.Units
 
         // Using a DependencyProperty as the backing store for Interval.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IntervalProperty =
-            DependencyProperty.Register ("Interval", typeof (Duration), typeof (AnimateBorder), new PropertyMetadata (new Duration(new TimeSpan(0,0,1))));
+            DependencyProperty.Register ("Interval", typeof (Duration), typeof (AnimateBorder), new PropertyMetadata (new Duration(new TimeSpan(0,0,1)), OnBorderBrushsCallBack));
 
         private static void OnBorderBrushsCallBack(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
