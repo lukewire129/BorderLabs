@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BorderLabs.Maui.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:aa="clr-namespace:BorderLabs.Maui"
+    xmlns:alohakit="clr-namespace:AlohaKit.Animations;assembly=AlohaKit.Animations">
+    <ContentPage.Resources>
+        <alohakit:StoryBoard x:Key="StoryBoard" Target="{x:Reference aa}">
+            <aa:PointLoopAnimation RepeatForever="True" Duration="1000" />
+        </alohakit:StoryBoard>
+    </ContentPage.Resources>
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="25">
+            <Border
+                x:Name="aa"
+                HeightRequest="300"
+                StrokeShape="RoundRectangle 5, 5, 5, 5"
+                StrokeThickness="10">
+                <Border.Stroke>
+                    <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                        <GradientStop Offset="0.1" Color="Red" />
+                        <GradientStop Offset="0.5" Color="Yellow" />
+                        <GradientStop Offset="1.0" Color="Green" />
+                    </LinearGradientBrush>
+                </Border.Stroke>
+                <Label Text="hihi" />
+            </Border>
+            <Button Clicked="Button_Clicked">
+                <Button.Triggers>
+                    <EventTrigger Event="Clicked">
+                        <alohakit:BeginAnimation Animation="{StaticResource StoryBoard}" />
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
