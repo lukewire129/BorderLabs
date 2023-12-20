@@ -19,6 +19,7 @@
                     <SolidColorBrush Color="Blue" />
                     <SolidColorBrush Color="Red" />
                     <SolidColorBrush Color="Lime" />
+                    <SolidColorBrush Color="Black" />
                 </x:Array>
             </units:AnimateBorder.BorderBrushs>
             <Grid>
