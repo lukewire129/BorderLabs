@@ -1,4 +1,4 @@
-WPF Border Animation
+WPF, Maui Border PointAnimation
 
 **Color Setting**
 ![image](https://github.com/lukewire129/BorderLabs/assets/54387261/986ebfc1-9cb1-462a-8356-3867634c7b38)
