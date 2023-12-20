@@ -10,9 +10,9 @@
                         <Border BorderThickness="10" CornerRadius="10">
                             <Border.BorderBrush>
                                 <LinearGradientBrush StartPoint="0 0" EndPoint="1 1">
-                                    <GradientStop Offset="0.0" Color="Black" />
+                                    <GradientStop Offset="0.0" Color="Blue" />
                                     <GradientStop Offset="0.5" Color="Red" />
-                                    <GradientStop Offset="1" Color="Black" />
+                                    <GradientStop Offset="1" Color="Lime" />
                                 </LinearGradientBrush>
                             </Border.BorderBrush>
                             <Border.Style>
@@ -24,25 +24,50 @@
                                                     <PointAnimation
                                                         Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
                                                         From="0,0"
-                                                        To="0.5,0"
-                                                        Duration="00:00:2" />
-                                                    <PointAnimation
-                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
-                                                        From="1,1"
-                                                        To="0.5, 1"
+                                                        To="1,0"
                                                         Duration="00:00:2" />
                                                     <PointAnimation
                                                         BeginTime="00:00:2"
                                                         Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
-                                                        From="0.5,0"
+                                                        From="1,0"
                                                         To="1,1"
+                                                        Duration="00:00:2" />
+                                                    <PointAnimation
+                                                        BeginTime="00:00:4"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
+                                                        From="1,1"
+                                                        To="0,1"
+                                                        Duration="00:00:2" />
+                                                    <PointAnimation
+                                                        BeginTime="00:00:6"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.StartPoint)"
+                                                        From="0,1"
+                                                        To="0,0"
+                                                        Duration="00:00:2" />
+                                                    <PointAnimation
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        From="1,1"
+                                                        To="0, 1"
                                                         Duration="00:00:2" />
                                                     <PointAnimation
                                                         BeginTime="00:00:2"
                                                         Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
-                                                        From="0.5,1"
+                                                        From="0, 1"
                                                         To="0, 0"
                                                         Duration="00:00:2" />
+                                                    <PointAnimation
+                                                        BeginTime="00:00:4"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        From="0,0"
+                                                        To="1,0"
+                                                        Duration="00:00:2" />
+                                                    <PointAnimation
+                                                        BeginTime="00:00:6"
+                                                        Storyboard.TargetProperty="BorderBrush.(LinearGradientBrush.EndPoint)"
+                                                        From="1,0"
+                                                        To="1,1"
+                                                        Duration="00:00:2" />
+
                                                 </Storyboard>
                                             </BeginStoryboard>
                                         </EventTrigger>

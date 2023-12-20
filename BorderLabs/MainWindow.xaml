@@ -16,11 +16,25 @@
             Interval="0:0:2">
             <units:AnimateBorder.BorderBrushs>
                 <x:Array Type="{x:Type SolidColorBrush}">
-                    <SolidColorBrush Color="Yellow" />
-                    <SolidColorBrush Color="Red" />
                     <SolidColorBrush Color="Blue" />
+                    <SolidColorBrush Color="Red" />
+                    <SolidColorBrush Color="Lime" />
                 </x:Array>
             </units:AnimateBorder.BorderBrushs>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="Box" />
+                <Button
+                    Grid.Column="1 "
+                    Width="100"
+                    Height="50" />
+            </Grid>
         </units:AnimateBorder>
     </Grid>
 </Window>

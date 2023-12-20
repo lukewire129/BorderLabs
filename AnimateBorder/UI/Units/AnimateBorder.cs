@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using AnimateBorder.Local.Animation;
+using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -36,11 +38,6 @@ namespace AnimateBorder.UI.Units
         public AnimateBorder()
         {
         }
-        public override void BeginInit()
-        {
-            base.BeginInit ();
-            //this.StartAnimation ();
-        }
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate ();
@@ -49,6 +46,8 @@ namespace AnimateBorder.UI.Units
         Storyboard sb;
         public void StartAnimation()
         {
+            if (BorderBrushs == null)
+                return;
             sb?.Pause ();            
             LinearGradientBrush linearGradient = new LinearGradientBrush ()
             {
@@ -67,37 +66,24 @@ namespace AnimateBorder.UI.Units
             if (BorderBrushs.Count () <= 1)
                 return;
 
+            this.BorderBrush = linearGradient;
             sb = new Storyboard ()
             {
                 RepeatBehavior = RepeatBehavior.Forever
             };
-
-            PointAnimation startPointAnimation1 = new PointAnimation (new Point (0, 0), new Point(0.5,0), Interval);
-            PointAnimation endPointAnimation1 = new PointAnimation (new Point (1, 1), new Point(0.5, 1), Interval);
-            PointAnimation startPointAnimation2 = new PointAnimation (new Point (0.5, 0), new Point (1, 1), Interval)
+            var ani = new GradationLoopAnimation (Interval);
+            for(int i=0; i<ani.GetStartPointAnimations.Count; i++)
             {
-                BeginTime = Interval.TimeSpan
-            };
-            PointAnimation endPointAnimation2 = new PointAnimation (new Point (0.5, 1), new Point (0,0), Interval)
+                Storyboard.SetTargetProperty (ani.GetStartPointAnimations[i], new PropertyPath ("BorderBrush.(LinearGradientBrush.StartPoint)"));
+                sb.Children.Add (ani.GetStartPointAnimations[i]);
+            }
+            for (int i = 0; i < ani.GetEndPointAnimations.Count; i++)
             {
-                BeginTime = Interval.TimeSpan
-            };
-            Storyboard.SetTarget (startPointAnimation1, this);
-            Storyboard.SetTarget (endPointAnimation1, this);
-            Storyboard.SetTarget (startPointAnimation2, this);
-            Storyboard.SetTarget (endPointAnimation2, this);
-            Storyboard.SetTargetProperty (startPointAnimation1, new PropertyPath ("BorderBrush.(LinearGradientBrush.StartPoint)"));
-            Storyboard.SetTargetProperty (endPointAnimation1, new PropertyPath ("BorderBrush.(LinearGradientBrush.EndPoint)"));
-            Storyboard.SetTargetProperty (startPointAnimation2, new PropertyPath ("BorderBrush.(LinearGradientBrush.StartPoint)"));
-            Storyboard.SetTargetProperty (endPointAnimation2, new PropertyPath ("BorderBrush.(LinearGradientBrush.EndPoint)"));
+                Storyboard.SetTargetProperty (ani.GetEndPointAnimations[i], new PropertyPath ("BorderBrush.(LinearGradientBrush.EndPoint)"));
+                sb.Children.Add (ani.GetEndPointAnimations[i]);
+            }
 
-            sb.Children.Add(startPointAnimation1);
-            sb.Children.Add(endPointAnimation1);
-            sb.Children.Add(startPointAnimation2);
-            sb.Children.Add(endPointAnimation2);
-
-            this.BorderBrush = linearGradient;
-            sb.Begin ();
+            BeginStoryboard (sb);
         }
 
         public void EndAnimation()
