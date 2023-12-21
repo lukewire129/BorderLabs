@@ -6,7 +6,7 @@
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
 
-    <Version>1.0.0.2</Version>
+    <Version>1.0.0.3</Version>
     <Authors>lukewire</Authors>
     <Product>lukewire</Product>
     <Copyright>lukewire</Copyright>
@@ -16,5 +16,4 @@
     <PackageTags>lukewire, wpf, BorderAnimation</PackageTags>
     <Description>Border Support</Description>
   </PropertyGroup>
-
 </Project>

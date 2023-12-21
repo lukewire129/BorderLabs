@@ -6,8 +6,24 @@ using System.Windows.Media.Animation;
 
 namespace AnimateBorder.UI.Units
 {
+    public enum AnimationType
+    {
+        Loop,
+        FadeInOut
+    }
     public class AnimateBorder : Border
     {
+        public AnimationType AnimationType
+        {
+            get { return (AnimationType)GetValue (AnimationTypeProperty); }
+            set { SetValue (AnimationTypeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AnimationTypeProperty =
+            DependencyProperty.Register ("AnimationType", typeof (AnimationType), typeof (AnimateBorder), new PropertyMetadata (AnimationType.Loop, OnBorderBrushsCallBack));
+
+
         public IEnumerable<SolidColorBrush> BorderBrushs
         {
             get { return (IEnumerable<SolidColorBrush>)GetValue(BorderBrushsProperty); }
@@ -41,46 +57,56 @@ namespace AnimateBorder.UI.Units
             base.OnApplyTemplate ();
             this.StartAnimation ();
         }
+        Brush tempBrush;
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged (e);
+
+            if (e.Property.Name == nameof (BorderBrush))
+            {
+                if (AnimationType != AnimationType.FadeInOut)
+                    return;
+                if (tempBrush == this.BorderBrush)
+                    return;
+                this.StartAnimation ();
+                this.tempBrush = BorderBrush;
+            }
+        }
         Storyboard sb;
         public void StartAnimation()
         {
-            if (BorderBrushs == null)
-                return;
             sb?.Pause ();            
-            LinearGradientBrush linearGradient = new LinearGradientBrush ()
+            BaseAnimation ani = null;
+            
+            if(AnimationType == AnimationType.Loop)
             {
-                StartPoint = new Point (0, 0),
-                EndPoint = new Point (1, 1),
-            };
-            double offset = BorderBrushs.Count () <= 1? 1.0 : 0.0;
-            double nextoffect = 1.0 / (BorderBrushs.Count () -1);
-            foreach (var brush in BorderBrushs)
-            {
-                linearGradient.GradientStops.Add (new GradientStop (((SolidColorBrush)brush).Color, offset));
-                offset += nextoffect;
-            }
-          
+                if (BorderBrushs == null)
+                    return;
+                if (BorderBrushs.Count () <= 1)
+                    return;
+                LinearGradientBrush linearGradient = new LinearGradientBrush ()
+                {
+                    StartPoint = new Point (0, 0),
+                    EndPoint = new Point (1, 1),
+                };
+                double offset = BorderBrushs.Count () <= 1 ? 1.0 : 0.0;
+                double nextoffect = 1.0 / (BorderBrushs.Count () - 1);
+                foreach (var brush in BorderBrushs)
+                {
+                    linearGradient.GradientStops.Add (new GradientStop (((SolidColorBrush)brush).Color, offset));
+                    offset += nextoffect;
+                }
 
-            if (BorderBrushs.Count () <= 1)
-                return;
-
-            this.BorderBrush = linearGradient;
-            sb = new Storyboard ()
-            {
-                RepeatBehavior = RepeatBehavior.Forever
-            };
-            var ani = new GradationLoopAnimation (Interval);
-            for(int i=0; i<ani.GetStartPointAnimations.Count; i++)
-            {
-                Storyboard.SetTargetProperty (ani.GetStartPointAnimations[i], new PropertyPath ("BorderBrush.(LinearGradientBrush.StartPoint)"));
-                sb.Children.Add (ani.GetStartPointAnimations[i]);
+                this.BorderBrush = linearGradient;
+                ani = new GradationLoopAnimation (Interval);
             }
-            for (int i = 0; i < ani.GetEndPointAnimations.Count; i++)
+            else if (AnimationType == AnimationType.FadeInOut)
             {
-                Storyboard.SetTargetProperty (ani.GetEndPointAnimations[i], new PropertyPath ("BorderBrush.(LinearGradientBrush.EndPoint)"));
-                sb.Children.Add (ani.GetEndPointAnimations[i]);
+                if (BorderBrush == null)
+                    return;
+                ani = new FadeInoutLoopAnimation (this.BorderBrush, Interval);
             }
-
+            sb = ani.GetStoryboard ();
             BeginStoryboard (sb);
         }
 

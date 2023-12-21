@@ -3,7 +3,7 @@ using System.Windows.Media.Animation;
 
 namespace AnimateBorder.Local.Animation;
 
-public class GradationLoopAnimation
+public class GradationLoopAnimation : BaseAnimation
 {
     List<PointAnimation> startanimations;
     List<PointAnimation> endanimations;
@@ -23,6 +23,12 @@ public class GradationLoopAnimation
         endanimations.Add (new PointAnimation (new Point (0, 0), new Point (1, 0), Interval));
         endanimations.Add (new PointAnimation (new Point (1, 0), new Point (1, 1), Interval));
         Duration tempduration = new Duration (new TimeSpan(0,0,0));
+
+        for(int i=0; i<4; i++)
+        {
+            Storyboard.SetTargetProperty (GetStartPointAnimations[i], new PropertyPath ("BorderBrush.(LinearGradientBrush.StartPoint)"));
+            Storyboard.SetTargetProperty (GetEndPointAnimations[i], new PropertyPath ("BorderBrush.(LinearGradientBrush.EndPoint)"));
+        }
         for (int i=1; i<4; i++)
         {
             startanimations[i].BeginTime = Interval.TimeSpan + tempduration.TimeSpan;
@@ -31,6 +37,22 @@ public class GradationLoopAnimation
         }
     }
 
-    public List<PointAnimation> GetStartPointAnimations => this.startanimations;
-    public List<PointAnimation> GetEndPointAnimations => this.endanimations;
+    private List<PointAnimation> GetStartPointAnimations => this.startanimations;
+    private List<PointAnimation> GetEndPointAnimations => this.endanimations;
+
+    public override Storyboard GetStoryboard()
+    {
+        Storyboard sb = new Storyboard ()
+        {
+            RepeatBehavior = RepeatBehavior.Forever
+        };
+
+        for (int i = 0; i < 4; i++)
+        {
+            sb.Children.Add (GetStartPointAnimations[i]);
+            sb.Children.Add (GetEndPointAnimations[i]);
+        }
+
+        return sb;
+    }
 }

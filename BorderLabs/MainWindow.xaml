@@ -11,17 +11,11 @@
     mc:Ignorable="d">
     <Grid>
         <units:AnimateBorder
-            BorderThickness="10"
-            CornerRadius="50"
-            Interval="0:0:2">
-            <units:AnimateBorder.BorderBrushs>
-                <x:Array Type="{x:Type SolidColorBrush}">
-                    <SolidColorBrush Color="Blue" />
-                    <SolidColorBrush Color="Red" />
-                    <SolidColorBrush Color="Lime" />
-                    <SolidColorBrush Color="Black" />
-                </x:Array>
-            </units:AnimateBorder.BorderBrushs>
+            AnimationType="FadeInOut"
+            BorderBrush="Blue"
+            BorderThickness="5"
+            CornerRadius="3"
+            Interval="0:0:0.5">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100" />
@@ -37,5 +31,18 @@
                     Height="50" />
             </Grid>
         </units:AnimateBorder>
+        <!--<units:FadeInOutBorder
+        Padding="15"
+        BorderBrush="Red"
+        BorderThickness="3"
+        Interval="0:0:0.5">
+        <Grid Background="Blue">
+        <Label
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Content="Children"
+        Foreground="White" />
+        </Grid>
+        </units:FadeInOutBorder>-->
     </Grid>
 </Window>
