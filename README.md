@@ -1,4 +1,4 @@
-## BorderLabs
+# BorderLabs
 
 ### Overview
 정적인 Border를 동적으로 변경할 수 있는 다양한 시도를 통해 만들어내기 위한 저장소입니다.
