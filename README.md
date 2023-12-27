@@ -44,7 +44,7 @@
      </Grid>
  </units:AnimateBorder>
 ```
-
+**동작 영상**
 | WPF | MAUI |
 |:----:|:----:|
 |<video src="https://github.com/lukewire129/BorderLabs/assets/54387261/b8ea25e6-f5ac-4815-a405-cf821a8180b0"/> | <video src="https://github.com/lukewire129/BorderLabs/assets/54387261/4da23973-d2ba-4bc6-ac79-4331ed325eca"/>|
@@ -76,5 +76,7 @@
     </Grid>
 </units:AnimateBorder>
 ```
+**동작 영상**
+
 https://github.com/lukewire129/BorderLabs/assets/54387261/54812961-e6d6-4fbc-85aa-e33f453b2628
 
