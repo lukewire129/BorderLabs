@@ -4,6 +4,9 @@
 정적인 Border를 동적으로 변경할 수 있는 다양한 시도를 통해 만들어내기 위한 저장소입니다.
 
 ## Border 상속기반
+
+![Nuget.AnimateBorder](https://img.shields.io/nuget/vpre/AnimateBorder?label=AnimateBorder&style=flat-square)
+![Nuget.AnimateBorder](https://img.shields.io/nuget/dt/AnimateBorder?color=blue&label=Downloads&style=flat-square)
 ### 1. Animation Loop Mode
 
  ![image](https://github.com/lukewire129/BorderLabs/assets/54387261/986ebfc1-9cb1-462a-8356-3867634c7b38)
